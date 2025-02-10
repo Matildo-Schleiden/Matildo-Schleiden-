@@ -1,0 +1,27 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig, ax = plt.subplots()
+ax.set_aspect('equal')
+
+# Spiral with rainbow gradient
+theta = np.linspace(0, 6 * np.pi, 300)
+r = np.linspace(0, 1, 300)
+x_spiral = r * np.cos(theta)
+y_spiral = r * np.sin(theta)
+colors = plt.cm.rainbow(np.linspace(0, 1, 300))
+for i in range(299):
+    ax.plot(x_spiral[i:i+2], y_spiral[i:i+2], color=colors[i], lw=2)
+
+# Heart shape function
+t = np.linspace(0, 2 * np.pi, 150)
+x_heart = 0.1 * np.sin(t)**3
+y_heart = 0.1 * (13 * np.cos(t) - 5 * np.cos(2 * t) - 2 * np.cos(3 * t) - np.cos(4 * t)) / 16
+
+# Plot hearts at center and spiral end
+ax.fill(x_heart, y_heart, 'red')
+ax.fill(x_heart + x_spiral[-1], y_heart + y_spiral[-1], 'red')
+
+plt.axis('off')
+plt.show()
+
